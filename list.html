@@ -1,0 +1,146 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Random Image</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  
+<body onload="getlist()">
+   <div id="navbar">
+  <a href="index.html">Random </a>
+  <a  href="search.html">Search </a>
+  <a class="active" href="list.html">Images</a>
+</div>
+
+  <h1>List</h1>
+  <div class="container" id="main">
+  </div>
+
+   <p class="imageDetails-1" onclick="nextList()"> Next Photo</p>
+  <script>
+    var count = 1;
+    function getlist() {
+      let clientId = "ibY_exvQEDrk66-KvBX9_lrnlQrteffHceySd7LEh-w";
+        let endpoint = `https://api.unsplash.com/photos?page=${count}&client_id=${clientId}`;
+
+
+        fetch(endpoint)
+        .then((response) => response.json())
+        .then((jsonData) => {
+
+          let container = document.querySelector("#main");
+
+          let block = document.createElement("div");
+          block.className = "flex-block";
+
+          for (var j = 0; j < 3 && j < jsonData.length ; j++) {
+              var box = document.createElement('div');
+              box.className = 'col-md-4 imageContainer';
+
+              var a = document.createElement('a');
+              a.className = "imageLink";
+              a.setAttribute("href", jsonData[j].links.html);
+
+              var image = document.createElement('img');
+              image.className = "unsplashImage";
+              image.src = jsonData[j].urls.regular;
+
+              a.appendChild(image);
+
+              box.appendChild(a);
+
+              block.appendChild(box);
+
+          }
+
+          container.appendChild(block);
+
+          block = document.createElement("div");
+          block.className = "flex-block";
+
+          for (var j = 3; j < 6 && j < jsonData.length ; j++) {
+              var box = document.createElement('div');
+              box.className = 'col-md-4 imageContainer';
+
+              var a = document.createElement('a');
+              a.className = "imageLink";
+              a.setAttribute("href", jsonData[j].links.html);
+
+              var image = document.createElement('img');
+              image.className = "unsplashImage";
+              image.src = jsonData[j].urls.regular;
+
+              a.appendChild(image);
+
+              box.appendChild(a);
+
+              block.appendChild(box);
+
+          }
+
+          container.appendChild(block);
+
+          block = document.createElement("div");
+          block.className = "flex-block";
+
+          for (var j = 6; j < 9 && j < jsonData.length ; j++) {
+              var box = document.createElement('div');
+              box.className = 'col-md-4 imageContainer';
+
+              var a = document.createElement('a');
+              a.className = "imageLink";
+              a.setAttribute("href", jsonData[j].links.html);
+
+              var image = document.createElement('img');
+              image.className = "unsplashImage";
+              image.src = jsonData[j].urls.regular;
+
+              a.appendChild(image);
+
+              box.appendChild(a);
+
+              block.appendChild(box);
+
+          }
+
+          container.appendChild(block);
+
+        })
+        .catch((error) => console.log("Error: " + error));
+    }
+
+    function nextList() {
+      count++;
+      getlist();
+    }
+
+  </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
